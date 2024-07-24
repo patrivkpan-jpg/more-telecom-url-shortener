@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('shortened_links', function (Blueprint $table) {
             $table->id();
             $table->string('path', 10)->unique();
-            $table->unsignedBigInteger('orginal_links_id');
+            $table->unsignedBigInteger('original_links_id');
             $table->timestamp('created_at')->useCurrent();
 
-            $table->foreign('orginal_links_id')->references('id')->on('orginal_links');
+            $table->foreign('original_links_id')->references('id')->on('orginal_links');
         });
     }
 

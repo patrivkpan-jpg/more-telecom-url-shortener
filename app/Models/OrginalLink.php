@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ShortenedLinks extends Model
+class OrginalLink extends Model
 {
     use HasFactory;
 
@@ -18,7 +18,6 @@ class ShortenedLinks extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'path',
-        'orginal_links_id'
+        'link'
     ];
 }
