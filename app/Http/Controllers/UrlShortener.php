@@ -27,4 +27,12 @@ class UrlShortener extends Controller
         $shortenedLink->original_links_id = $originalLinkId;
         $shortenedLink->save();
     }
+
+    public function retrieveUrl($path)
+    {
+        $link = ShortenedLink::where('path', $path)
+            ->with('originalLink')
+            ->first();
+        return redirect($link->originalLink->link);
+    }
 }

@@ -7,4 +7,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/url/shorten', [UrlShortener::class, 'shortenUrl'])->name('url.shorten');
+Route::get('/{path}', [UrlShortener::class, 'retrieveUrl'])->name('url.retrieve');
+
+Route::prefix('url')->group(function () {
+    Route::post('shorten', [UrlShortener::class, 'shortenUrl'])->name('url.shorten');
+});

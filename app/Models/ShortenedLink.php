@@ -21,4 +21,9 @@ class ShortenedLink extends Model
         'path',
         'original_links_id'
     ];
+
+    public function originalLink()
+    {        
+        return $this->belongsTo(OrginalLink::class, 'original_links_id');
+    }
 }
