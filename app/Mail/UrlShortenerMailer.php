@@ -13,14 +13,12 @@ class UrlShortenerMailer extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $url;
     /**
      * Create a new message instance.
      */
-    public function __construct($url)
+    public function __construct(private $url)
     {
         //
-        $this->url = $url;
     }
 
     /**
