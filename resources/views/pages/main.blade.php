@@ -16,6 +16,17 @@
                     </div>
                     <button type="submit" id="submitShortenUrlFormBtn" class="btn btn-primary w-100">Submit</button>
                 </form>
+                <form id="displayUrlContainer" class="hidden">
+                    <div class="form-group mb-3">
+                        <label for="originalUrlInput" class="form-label">Original URL</label>
+                        <input type="text" id="originalUrlInput" class="form-control" disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="shortenedUrlInput" class="form-label">Shortened URL</label>
+                        <input type="text" id="shortenedUrlInput" class="form-control" disabled>
+                    </div>
+                    <button type="submit" id="makeAnotherBtn" class="btn btn-primary w-100">Make another?</button>
+                </form>
             </div>
         </div>
     </div>

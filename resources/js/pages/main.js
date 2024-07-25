@@ -1,9 +1,13 @@
 $(document).ready(function () {
-    console.log(routes.base)
+
     const registerEventListeners = () => {
         $('#shortenUrlForm').submit((e) => {
             e.preventDefault()
             submitShortenUrlForm();
+        })
+        $('#displayUrlContainer').submit((e) => {
+            e.preventDefault()
+            makeAnother();
         })
     }
 
@@ -22,7 +26,13 @@ $(document).ready(function () {
             url: routes.shortenUrlRouteName,
             data: data,
             success: (response) => {
-                // TODO : Display shortened URL; priority : 1
+                // TODO : Create a copy shortened link button ; priority : 2
+                $('#shortenUrlForm').addClass('hidden');
+                $('#originalUrlInput').val(data.link);
+                $('#shortenedUrlInput').val(response);
+                $('#displayUrlContainer').removeClass('hidden')
+                $('#linkInput').val('');
+                $('#emailInput').val('');
             },
             // TODO : Improve design; priority : 2
             error : function (xhr, status, error) {
@@ -39,6 +49,13 @@ $(document).ready(function () {
                 $('#submitShortenUrlFormBtn').removeAttr('disabled');
             }
         });
+    }
+
+    const makeAnother = () => {
+        $('#displayUrlContainer').addClass('hidden');
+        $('#originalUrlInput').val('');
+        $('#shortenedUrlInput').val('');
+        $('#shortenUrlForm').removeClass('hidden');
     }
     
     registerEventListeners();
