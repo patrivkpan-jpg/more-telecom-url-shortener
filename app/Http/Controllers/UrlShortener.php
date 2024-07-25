@@ -16,9 +16,12 @@ class UrlShortener extends Controller
             $path = Str::random(10);
         }
 
-        // TODO: First or create; priority: 1
         $originalLink = new OrginalLink;
-        $originalLink->link = $request->get('link');
+        $originalLink = OrginalLink::firstOrNew(
+            [
+                'link' => $request->get('link')
+            ]
+        );
         $originalLink->save();
 
         $originalLinkId = $originalLink->id;
