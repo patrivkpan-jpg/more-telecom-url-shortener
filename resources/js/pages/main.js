@@ -25,8 +25,10 @@ $(document).ready(function () {
             type: 'POST',
             url: routes.shortenUrlRouteName,
             data: data,
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            },
             success: (response) => {
-                // TODO : Create a copy shortened link button ; priority : 2
                 $('#shortenUrlForm').addClass('hidden');
                 $('#originalUrlInput').val(data.link);
                 $('#shortenedUrlInput').val(response);

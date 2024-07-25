@@ -4,6 +4,7 @@
         <div class="form-container d-flex align-items-center justify-content-center h-50">
             <div class="d-flex align-items-center justify-content-center">
                 <form id="shortenUrlForm" action="{{ route('url.shorten') }}" method="post">
+                    @csrf
                     <div class="form-group mb-3">
                         <label for="linkInput" class="form-label">Original URL</label>
                         <input type="text" id="linkInput" class="form-control">
