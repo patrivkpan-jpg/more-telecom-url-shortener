@@ -22,8 +22,7 @@ $(document).ready(function () {
             url: routes.shortenUrlRouteName,
             data: data,
             success: (response) => {
-                const redirect = routes.base + response;
-                alert(redirect)
+                // TODO : Display shortened URL; priority : 1
             },
             // TODO : Improve design; priority : 2
             error : function (xhr, status, error) {

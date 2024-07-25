@@ -24,7 +24,6 @@
     @vite(['resources/js/pages/main.js'])
     <script>
         var routes = {
-            'base' : "{{ env('APP_URL') }}",
             'shortenUrlRouteName' : "{{ route('url.shorten') }}"
         }
     </script>

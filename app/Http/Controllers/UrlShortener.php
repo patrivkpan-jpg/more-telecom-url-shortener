@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UrlShortenerRequest;
+use App\Mail\UrlShortenerMailer;
 use App\Models\OrginalLink;
 use App\Models\ShortenedLink;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class UrlShortener extends Controller
 {
@@ -30,7 +32,13 @@ class UrlShortener extends Controller
         $shortenedLink->original_links_id = $originalLinkId;
         $shortenedLink->save();
 
-        return $shortenedLink->path;
+        $email = $request->get('email');
+        $url = env('APP_URL') . $shortenedLink->path;
+        if (isset($email)) {
+            // TODO: Push to queue; priority : 1
+            Mail::to($email)->send(new UrlShortenerMailer($url));
+        }
+        return $url;
     }
 
     public function retrieveUrl($path)
