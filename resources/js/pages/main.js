@@ -11,6 +11,7 @@ $(document).ready(function () {
         })
     }
 
+    // Submit form
     const submitShortenUrlForm = () => {
         $('#submitShortenUrlFormBtn').attr('disabled', 'disabled');
         let data = {
@@ -20,7 +21,6 @@ $(document).ready(function () {
         if (emailInputVal !== '') {
             data.email = emailInputVal;
         }
-        console.log(data)
         $.ajax({
             type: 'POST',
             url: routes.shortenUrlRouteName,
@@ -28,6 +28,7 @@ $(document).ready(function () {
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
             },
+            // Populate input fields to display shortened URL
             success: (response) => {
                 $('#shortenUrlForm').addClass('hidden');
                 $('#originalUrlInput').val(data.link);
@@ -36,7 +37,6 @@ $(document).ready(function () {
                 $('#linkInput').val('');
                 $('#emailInput').val('');
             },
-            // TODO : Improve design; priority : 2
             error : function (xhr, status, error) {
                 let errors = JSON.parse(xhr.responseText).errors
                 Object.keys(errors).forEach(function (key) {
@@ -53,6 +53,7 @@ $(document).ready(function () {
         });
     }
 
+    // Show form to create another shortened URL
     const makeAnother = () => {
         $('#displayUrlContainer').addClass('hidden');
         $('#originalUrlInput').val('');

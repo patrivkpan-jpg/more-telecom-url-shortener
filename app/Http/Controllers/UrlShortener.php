@@ -10,6 +10,11 @@ use Illuminate\Support\Str;
 
 class UrlShortener extends Controller
 {
+    /**
+     * Shorten user provided URL and return and email a shortened URL
+     * @param \App\Http\Requests\UrlShortenerRequest $request
+     * @return string
+     */
     public function shortenUrl(UrlShortenerRequest $request)
     {
         $path = Str::random(10);
@@ -17,6 +22,7 @@ class UrlShortener extends Controller
             $path = Str::random(10);
         }
 
+        // Add the original link to the database or retrieve the db record if original link as already been inserted
         $originalLink = new OrginalLink;
         $originalLink = OrginalLink::firstOrNew(
             [
@@ -33,10 +39,16 @@ class UrlShortener extends Controller
 
         $email = $request->get('email');
         $url = env('APP_URL') . $shortenedLink->path;
+        // Dispatch job to send email
         SendShortenedUrlEmail::dispatchIf(isset($email), $email, $url);
         return $url;
     }
 
+    /**
+     * Redirect to original URL from shortened URL
+     * @param mixed $path
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function retrieveUrl($path)
     {
         $link = ShortenedLink::where('path', $path)
